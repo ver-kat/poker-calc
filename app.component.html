@@ -1,0 +1,34 @@
+<div style="text-align:center">
+  <h1>
+    {{title}}
+  </h1>
+</div>
+<div>
+  <form [formGroup]="formModel">
+    <div *ngFor="let cardGroup of cardGroupArray" [formGroupName]="cardGroup.cardGroupName">
+      <label for="">{{cardGroup.cardGroupName}}</label>
+      <div *ngFor="let card of cardGroup.cardArray;let i = index" (change)="onChange(cardGroup.cardGroupName)">
+        <select [formControlName]="'cardRank'+i">
+            <option *ngFor="let opt of cardGroup.aCard.cardRanks" [value]="opt.key">{{opt.value}}</option>
+          </select>
+        <select [formControlName]="'cardSuit'+i">
+          <option *ngFor="let opt of cardGroup.aCard.cardSuits" [value]="opt.key">{{opt.value}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<br>
+<div>
+  <table border="1">
+    <th></th><th>{{pocketCardGroupName}}</th><th>{{flopCardGroupName}}</th><th>{{turnCardGroupName}}</th><th>{{riverCardGroupName}}</th>
+    <tr *ngFor="let hand of pokerHandsArray;let i = index">
+      <td>{{hand}}</td>
+      <td>{{probabilitiesPocket[i]}}</td>
+      <td>{{probabilitiesFlop[i]}}</td>
+      <td>{{probabilitiesTurn[i]}}</td>
+      <td>{{probabilitiesRiver[i]}}</td>
+    </tr>
+  </table>
+</div>
